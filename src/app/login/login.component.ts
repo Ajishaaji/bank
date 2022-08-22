@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { never } from 'rxjs';
+import { DataService } from '../service/data.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +26,7 @@ pswd=""
     1002:{acno:1002,username:'vyom',password:1002,balance:5000},
   }
 
-  constructor() { }
+  constructor(private router:Router,private dataservice:DataService) { }
 
   ngOnInit(): void {
   }
@@ -39,53 +41,15 @@ pswdChange(event:any){
 }
 
  
-  //login(){
+  login(){
 //fetch acno
-   // var acno=this.acno
-    //console.log(acno);
+    var acno=this.acno
     //fetch pwd
-    //var pswd=this.pswd
-   // console.log(pswd);
-
-    //let userDetails=this.database
-    //if(acno in userDetails){
-      //if(pswd==userDetails[acno]['password']){
-       // alert('Log in successfull')
-      //}
-    
-    //else{
-     // alert('incorrect password')
-   // }
- // }
-    //else{
-      //alert('user does not exit')
-    //}
- // }
-//}
-
-login(a:any,p:any){
-  console.log(a);
-  
-  //fetch acno
-      var acno=a.value
-      
-      //fetch pwd
-      var pswd=p.value
-      
-  
-      let userDetails=this.database
-      if(acno in userDetails){
-        if(pswd==userDetails[acno]['password']){
-          alert('Log in successfull')
-        }
-      
-      else{
-       alert('incorrect password')
-     }
-   }
-      else{
-        alert('user does not exit')
-      }
-   }
-  }
-
+    var pswd=this.pswd 
+    const result= this.dataservice.login(acno,pswd)
+    if(result){
+      alert("Log in successfull")
+      this.router.navigateByUrl('dashboard')
+    }
+}   
+}

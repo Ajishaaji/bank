@@ -4,22 +4,23 @@
     <div class="col-lg-4"></div>
     <div class="col-lg-4" style="margin-top: 100px;">
         <div class="border container">
-        <h2 class="text-center"><font color="white">Login Form</font></h2>
-        <form action="" class=" p-5">
+        <h2 class="text-center"><font color="black">Login Form</font></h2>
+        <form action="" class=" p-5" (ngSubmit)="login()">
             <div class="m-3">
                 <!--acno (change)="acnoChange($event)"-->
-                <input #acno class="form-control" type="text" [placeholder]="accPlaceholder">
+                <!--acno template reference model-->
+                <input [(ngModel)]="acno" name="acno" class="form-control" type="text" [placeholder]="accPlaceholder">
             </div>
             <div class="m-3">
                 <!--password (change)="pswdChange($event)"-->
-                <input #pswd class="form-control" type="password" placeholder="password">
+                <input [(ngModel)]="pswd" name="pswd" class="form-control" type="password" placeholder="password">
             </div>
             <div class="m-3">
-              <input (click)="login(acno,pswd)" class="btn btn-primary" type="button" value="Login" name="" id="loginbtn">
+              <input  class="btn btn-primary" type="submit" value="Login" name="" id="loginbtn">
             </div>
         </form>
         <div>
-            <label for=""><font color="white">Not a user? click here</font> <a href="">register</a></label>
+            <label for=""><font color="black">Not a user? click here to </font> <a routerLink="register">register</a></label>
         </div>
     </div>
 </div>

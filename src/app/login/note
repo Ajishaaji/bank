@@ -1,0 +1,21 @@
+two way binding -same time data sharing in both direction
+             formsModule-import in appmodule
+             ngModel - syntax -[(ngModel)]   ,set name attribute if it is used inside from tag
+
+             path setting  component path setting,router outlet selector
+             dependency injecton-inside constructor of a class
+
+-- to create service - ng g s service-name
+
+ngSubmit
+
+angular forms
+          template driven forms
+          model driven forms  - reactive forms-import reactiveformsmodule
+             form group,form array,form control
+
+ angular directives- 
+                    component directives 
+                    structural directives   - prefix *
+                    ngif
+
