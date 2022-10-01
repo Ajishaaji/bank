@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { TransactionComponent } from './transaction/transaction.component';
 //set path for component
 const routes: Routes = [
   //login
@@ -16,9 +17,13 @@ const routes: Routes = [
   //register
   {
     path:'register',component:RegisterComponent
-  }
-
-
+  },
+  //TransactionComponent
+  
+    {
+      path:'transaction',component:TransactionComponent
+    }
+  
 ];
 
 @NgModule({

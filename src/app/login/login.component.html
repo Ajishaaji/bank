@@ -5,15 +5,23 @@
     <div class="col-lg-4" style="margin-top: 100px;">
         <div class="border container">
         <h2 class="text-center"><font color="black">Login Form</font></h2>
-        <form action="" class=" p-5" (ngSubmit)="login()">
+        <form [formGroup]="loginForm"action="" class=" p-5" (ngSubmit)="login()">
             <div class="m-3">
                 <!--acno (change)="acnoChange($event)"-->
                 <!--acno template reference model-->
-                <input [(ngModel)]="acno" name="acno" class="form-control" type="text" [placeholder]="accPlaceholder">
+                <input formControlName="acno" name="acno" class="form-control" type="text" [placeholder]="accPlaceholder">
+            </div>
+            <div  *ngIf="this.loginForm.get('acno')?.touched&&this.loginForm.get('acno')?.errors"
+            class="m-3" style="color: red;">invalid accountnumber
+                
             </div>
             <div class="m-3">
                 <!--password (change)="pswdChange($event)"-->
-                <input [(ngModel)]="pswd" name="pswd" class="form-control" type="password" placeholder="password">
+                <input formControlName="pswd" name="pswd" class="form-control" type="password" placeholder="password">
+            </div>
+            <div  *ngIf="this.loginForm.get('acno')?.touched&&this.loginForm.get('acno')?.errors"
+            class="m-3" style="color: red;">invalid password
+                
             </div>
             <div class="m-3">
               <input  class="btn btn-primary" type="submit" value="Login" name="" id="loginbtn">

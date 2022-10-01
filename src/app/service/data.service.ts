@@ -1,68 +1,130 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+const options={
+  headers:new HttpHeaders()
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  //database
-  database:any={
-    1000:{acno:1000,username:'neer',password:1000,balance:5000},
-    1001:{acno:1001,username:'Laisha',password:1001,balance:5000},
-    1002:{acno:1002,username:'vyom',password:1002,balance:5000},
-  }
 
-  constructor() { 
-    this.getDetails()
+  //currentUser
+currentUser:any;
+
+//currentAcno:any
+currentAcno:any
+
+  //database
+  //database:any={
+    //1000:{acno:1000,username:'neer',password:1000,balance:5000,transaction:[]},
+    //1001:{acno:1001,username:'Laisha',password:1001,balance:5000,transaction:[]},
+    //1002:{acno:1002,username:'vyom',password:1002,balance:5000,transaction:[]}
+  //}
+
+  constructor(private http:HttpClient) { 
   }
 
   //saveDetails
-  saveDetails(){
-    localStorage.setItem('database',JSON.stringify(this.database))
-  }
+  //saveDetails(){
+   // localStorage.setItem('database',JSON.stringify(this.database))
+    //if(this.currentUser){
+    //  localStorage.setItem('currentUser',JSON.stringify(this.currentUser))
+    //}
+    //if(this.currentAcno){
+    //localStorage.setItem('currentAcno',JSON.stringify(this.currentAcno))
+
+    //}
+  //}
   //getDetails
- getDetails(){
-   this.database=JSON.parse(localStorage.getItem('database') || '')
-  }
+ //getDetails(){
+   //this.database=JSON.parse(localStorage.getItem('database') || '')
+   //if(localStorage.getItem('currentUser')){
+   // this.currentUser=JSON.parse(localStorage.getItem('currentUser') || '')
+
+   //}
+   //if(localStorage.getItem('currentAcno')){
+    //this.currentAcno=JSON.parse(localStorage.getItem('currentAcno') || '')
+
+   //}
+
+  //}
 
 
   //register
   register(username:any,acno:any,password:any){
-    let database=this.database
-    if(acno in database){
-      return false
-    }
-    else{
-      database[acno]={
-        acno,
-        username,
-        password,
-        balance:0
-      }
-      this.saveDetails()
-      return true
-    }
+
+const body ={
+  username,
+  acno,
+  password
+}
+//register API
+   return this.http.post('http://localhost:3000/register',body)
   }
 
   //login
   login(acno:any,pswd:any){
    
     
-        let userDetails=this.database
-        if(acno in userDetails){
-          if(pswd==userDetails[acno]['password']){
-            return true
-           
-          }
-        
-        else{
-          alert('incorrect password')
-          return false
+        const body={
+          acno,
+          pswd
         }
-     }
-        else{
-          alert('user does not exit')
-          return false
-        }
+        //login API
+        return this.http.post('http://localhost:3000/login',body)
       }
+       
+      //deposit
+      deposit(acno:any,pswd:any,amt:any){
+        const body={
+          acno,
+          pswd,
+          amt
+        }
+        //deposit API
+        return this.http.post('http://localhost:3000/deposit',body,this.getToken())
+      }
+      //to get token and attach to req header
+      getToken(){
+        //get token
+        var token=JSON.parse(localStorage.getItem('token') ||'')
+
+        //create request header
+        let headers=new HttpHeaders()
+
+        headers=headers.append('x-access-token',token)
+        //function overloading
+        options.headers=headers
+
+        return options
+      }
+      
+    
+      //withdraw
+    withdraw(acno:any,pswd:any,amt:any){
+      const body={
+        acno,
+        pswd,
+        amt
+      }
+      //withdraw API
+      return this.http.post('http://localhost:3000/withdraw',body,this.getToken())
     }
+
+     //transaction
+    getTransaction(acno:any){
+      const body={
+        acno,
+        
+      }
+      //transaction API
+      return this.http.post('http://localhost:3000/transaction',body,this.getToken())
+    }
+    deleteAcc(acno:any){
+      //delete Api
+      return this.http.delete('http://localhost:3000/deleteAcc/'+acno)
+    }
+  }
   

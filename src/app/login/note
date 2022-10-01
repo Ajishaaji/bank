@@ -17,5 +17,13 @@ angular forms
  angular directives- 
                     component directives 
                     structural directives   - prefix *
-                    ngif
+                    *ngIf
+                    *ngFor
+
+          attribute directive - ngClass          
+
+ parent child communication
+
+        parent - child - @Input()   
+        child - parent - @output()                
 
